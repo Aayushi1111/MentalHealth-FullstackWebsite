@@ -77,7 +77,11 @@ app.post("/api/generateMeme", async (req, res) => {
       .json({ error: "An error occurred while generating the meme." });
   }
 });
+app.use(express.static(path.join(__dirname, '../client/build')));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
